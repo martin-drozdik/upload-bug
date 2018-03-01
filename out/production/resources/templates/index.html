@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelear.org">
+
+<head>
+  <meta charset="UTF-8"/>
+  <title>Spring Boot Learning</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+
+<h1>Learning Spring Boot</h1>
+
+<div>
+
+  <table>
+
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Image</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tobdy>
+      <tr th:each="image : ${images}">
+        <td th:text="${image.id}"></td>
+        <td th:text="${image.name}"></td>
+        <td>
+          <a th:href="@{'/images/' + ${image.name} + '/raw'}">
+            <img th:src="@{'/images/' + ${image.name} + '/raw'}" class="thumbnail"/>
+          </a>
+        </td>
+        <td>
+          <form th:method="delete" th:action="@{'/images/' + ${image.name}}">
+            <input type="submit" value="delete">
+          </form>
+        </td>
+      </tr>
+    </tobdy>
+  </table>
+
+  <form method="post" action="/images" enctype="multipart/form-data">
+    <p><input type="file" name="file"></p>
+    <p><input type="submit" value="submit"></p>
+  </form>
+
+</div>
+
+</body>
+</html>
